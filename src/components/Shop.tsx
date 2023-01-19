@@ -1,13 +1,20 @@
 import { Box, Grid, GridItem, Heading, Image, VStack, Text, Button } from '@chakra-ui/react';
+import { ACTIONS } from '../App';
 
 interface ShopProps {
-	products: {
-		map(arg0: (product: Product) => JSX.Element): import('react').ReactNode;
-		id: number;
-		title: string;
-		price: number;
-		thumbnail: string;
+	state: {
+		products: {
+			map(arg0: (product: Product) => JSX.Element): import('react').ReactNode;
+			id: number;
+			title: string;
+			price: number;
+			thumbnail: string;
+		};
 	};
+	dispatch: React.Dispatch<{
+		payload: any;
+		type: string;
+	}>;
 }
 interface Product {
 	id: number;
@@ -16,13 +23,13 @@ interface Product {
 	title: string;
 }
 
-const Shop: React.FC<ShopProps> = ({ products }) => {
+const Shop: React.FC<ShopProps> = ({ state, dispatch }) => {
 	return (
 		<VStack maxW='80%' p='4'>
 			<Heading>Shop</Heading>
 			<Grid templateColumns='repeat(5, 1fr)' gap='4'>
-				{products &&
-					products.map((product: Product) => {
+				{state &&
+					state.products.map((product: Product) => {
 						const { id, thumbnail, price, title } = product;
 						return (
 							<GridItem key={id} border='1px solid black' borderRadius='1rem' px='2' py='1'>
@@ -32,8 +39,28 @@ const Shop: React.FC<ShopProps> = ({ products }) => {
 									</Box>
 									<Heading size='xs'>{title}</Heading>
 									<Text alignSelf='flex-start'>${price}</Text>
-									<Button colorScheme='teal'>Add to Cart</Button>
-									<Button colorScheme='red'>Remove from Cart</Button>
+									<Button
+										colorScheme='teal'
+										onClick={() => {
+											dispatch({
+												type: ACTIONS.ADD_TO_CART,
+												payload: undefined,
+											});
+										}}
+									>
+										Add to Cart
+									</Button>
+									<Button
+										colorScheme='red'
+										onClick={() => {
+											dispatch({
+												type: ACTIONS.REMOVE_FROM_CART,
+												payload: undefined,
+											});
+										}}
+									>
+										Remove from Cart
+									</Button>
 								</VStack>
 							</GridItem>
 						);
