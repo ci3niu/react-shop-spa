@@ -1,35 +1,6 @@
 import { Box, Grid, GridItem, Heading, Image, VStack, Text, Button } from '@chakra-ui/react';
-import { ACTIONS } from '../shopReducer';
-
-interface ShopProps {
-	state: {
-		cart: {
-			some(arg0: (item: any) => boolean): import('react').ReactNode;
-			id: number;
-			title: string;
-			price: number;
-			thumbnail: string;
-		};
-		products: {
-			length: number;
-			map(arg0: (product: Product) => JSX.Element): import('react').ReactNode;
-			id: number;
-			title: string;
-			price: number;
-			thumbnail: string;
-		};
-	};
-	dispatch: React.Dispatch<{
-		payload: any;
-		type: string;
-	}>;
-}
-interface Product {
-	id: number;
-	thumbnail: string;
-	price: number;
-	title: string;
-}
+import { Product, ShopProps } from '../App.types';
+import { ACTIONS } from '../reducers/shopReducer';
 
 const Shop: React.FC<ShopProps> = ({ state, dispatch }) => {
 	const { products, cart } = state;
