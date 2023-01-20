@@ -13,13 +13,15 @@ const Shop: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 					products.map((product: Product) => {
 						const { id, thumbnail, price, title } = product;
 						return (
-							<GridItem key={id} border='1px solid black' borderRadius='1rem' px='2' py='1'>
+							<GridItem key={id} border='1px solid black' borderRadius='1rem' p='4'>
 								<VStack>
-									<Box boxSize='40' borderRadius='0.5rem' overflow='hidden'>
-										<Image src={thumbnail} alt={title} w='100%' objectFit='cover' />
+									<Box h='32' borderRadius='0.5rem' overflow='hidden'>
+										<Image src={thumbnail} alt={title} h='100%' objectFit='cover' />
 									</Box>
 									<Heading size='xs'>{title}</Heading>
-									<Text alignSelf='flex-start'>${price}</Text>
+									<Text fontWeight='bold' alignSelf='flex-start'>
+										${price}
+									</Text>
 									{cart.some((item) => item.id === id) ? (
 										<Button
 											colorScheme='red'

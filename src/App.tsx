@@ -10,6 +10,7 @@ const App = () => {
 		products: [],
 		cart: [],
 	});
+	const { products } = state;
 
 	const getData = async () => {
 		const res = await fetch('https://dummyjson.com/products?limit=15');
@@ -24,11 +25,11 @@ const App = () => {
 		getData();
 	}, []);
 
-	if (state.products.length === 0) return <Heading>Loading data...</Heading>;
+	if (products.length === 0) return <Heading>Loading data...</Heading>;
 
 	return (
 		<HStack w='100vw' justifyContent='space-between'>
-			{state.products.length > 0 && (
+			{products.length > 0 && (
 				<>
 					<Shop state={state} dispatch={dispatch} />
 					<Cart state={state} dispatch={dispatch} />

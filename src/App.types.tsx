@@ -12,6 +12,7 @@ export interface ReducerState {
 		title: string;
 		price: number;
 		thumbnail: string;
+		qty: number;
 	}[];
 
 	products: {
