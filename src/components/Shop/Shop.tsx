@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Heading, Image, VStack, Text, Button } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Image, VStack, Text, HStack } from '@chakra-ui/react';
 import { Product, ShopAndCartProps } from '../../App.types';
 
 import { AddBtn, RemoveBtn } from './ItemButtons';
@@ -14,14 +14,16 @@ const Shop: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 						const { id, thumbnail, price, title } = shopItem;
 						return (
 							<GridItem key={id} border='1px solid black' borderRadius='1rem' p='4'>
-								<VStack>
+								<VStack h='100%' justifyContent='space-between'>
 									<Box h='32' borderRadius='0.5rem' overflow='hidden'>
 										<Image src={thumbnail} alt={title} h='100%' objectFit='cover' />
 									</Box>
-									<Heading size='xs'>{title}</Heading>
-									<Text fontWeight='bold' alignSelf='flex-start'>
-										${price}
-									</Text>
+									<HStack w='100%' justifyContent='space-between'>
+										<Text size='xs'>{title}</Text>
+										<Text fontWeight='bold' alignSelf='flex-start'>
+											${price}
+										</Text>
+									</HStack>
 
 									{cart.some((item) => item.id === id) ? (
 										<RemoveBtn shopItem={shopItem} dispatch={dispatch} />

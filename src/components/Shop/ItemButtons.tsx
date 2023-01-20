@@ -32,8 +32,6 @@ export const AddBtn: React.FC<BtnProps> = ({ shopItem, dispatch }) => {
 };
 
 export const RemoveBtn: React.FC<BtnProps> = ({ shopItem, dispatch }) => {
-	const { id, thumbnail, price, title } = shopItem;
-
 	return (
 		<Button
 			colorScheme='red'
