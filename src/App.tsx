@@ -39,11 +39,11 @@ const App = () => {
 		<HStack w='100vw' h='100vh'>
 			{products.length > 0 && (
 				<>
-					<VStack w='80%' p='4'>
+					<VStack w='80%' p='4' h='100%'>
 						<Heading>Shop</Heading>
 						<Shop state={state} dispatch={dispatch} />
 					</VStack>
-					<VStack w='20%' bgColor='#ddd' p='4' h='100vh'>
+					<VStack w='20%' bgColor='#ddd' p='4' h='100%'>
 						<Heading mb='8'>Cart</Heading>
 						<Cart state={state} dispatch={dispatch} />
 					</VStack>

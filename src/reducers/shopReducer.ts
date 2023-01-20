@@ -5,6 +5,7 @@ export const ACTIONS = {
 	ADD_TO_CART: 'add-to-cart',
 	REMOVE_FROM_CART: 'remove-from-cart',
 	CHANGE_QTY: 'change-qty',
+	CLEAR_CART: 'clear-cart',
 };
 
 export const shopReducer = (
@@ -28,6 +29,8 @@ export const shopReducer = (
 					item.id === action.payload.id ? (item.qty = action.payload.qty) : item.qty
 				),
 			};
+		case ACTIONS.CLEAR_CART:
+			return { ...state, cart: [] };
 
 		default:
 			return state;

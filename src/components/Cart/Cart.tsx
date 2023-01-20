@@ -24,14 +24,22 @@ const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	}, [cart]);
 
 	return (
-		<VStack w='100%'>
+		<VStack w='100%' h='100%'>
 			<Heading size='sm' mb='8'>{`Total: $${total}`}</Heading>
 			{cart.length === 0 && <Text>Cart is empty</Text>}
 
 			{cart.map((cartItem) => {
-				const { thumbnail, title, price, qty } = cartItem;
+				const { id, thumbnail, title, price, qty } = cartItem;
 				return (
-					<HStack border='1px solid black' w='90%' borderRadius='0.5rem' py='2' px='4' justifyContent='space-between'>
+					<HStack
+						key={id}
+						border='1px solid black'
+						w='90%'
+						borderRadius='0.5rem'
+						py='2'
+						px='4'
+						justifyContent='space-between'
+					>
 						<Box boxSize='20' borderRadius='0.25rem' overflow='hidden'>
 							<Image src={thumbnail} alt={title} h='100%' objectFit='cover' />
 						</Box>
@@ -55,6 +63,19 @@ const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 					</HStack>
 				);
 			})}
+			{cart.length > 0 && (
+				<Button
+					colorScheme='red'
+					onClick={() => {
+						dispatch({
+							type: ACTIONS.CLEAR_CART,
+							payload: null,
+						});
+					}}
+				>
+					Clear Cart
+				</Button>
+			)}
 		</VStack>
 	);
 };
