@@ -36,10 +36,10 @@ const App = () => {
 	}
 
 	return (
-		<HStack w='100vw'>
+		<HStack w='100vw' h='100vh'>
 			{products.length > 0 && (
 				<>
-					<VStack w='80%' p='4' h='100vh'>
+					<VStack w='80%' p='4'>
 						<Heading>Shop</Heading>
 						<Shop state={state} dispatch={dispatch} />
 					</VStack>

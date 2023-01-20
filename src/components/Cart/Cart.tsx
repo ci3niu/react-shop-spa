@@ -1,7 +1,9 @@
-import { Heading, VStack, Text, Box, Image, Button, HStack, Container } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+
 import { ShopAndCartProps } from '../../App.types';
 import { ACTIONS } from '../../reducers/shopReducer';
+
+import { Heading, VStack, Text, Image, Button, HStack, Box } from '@chakra-ui/react';
 
 const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	const [total, setTotal] = useState<Number>();
@@ -22,32 +24,35 @@ const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	}, [cart]);
 
 	return (
-		<VStack>
-			<Heading size='sm'>{`Total: $${total}`}</Heading>
-			{cart.length > 0 ? <div></div> : <Text>Cart is empty</Text>}
-			{cart.map((item) => {
-				const { thumbnail, title, price, qty } = item;
+		<VStack w='100%'>
+			<Heading size='sm' mb='8'>{`Total: $${total}`}</Heading>
+			{cart.length === 0 && <Text>Cart is empty</Text>}
+
+			{cart.map((cartItem) => {
+				const { thumbnail, title, price, qty } = cartItem;
 				return (
-					<VStack border='1px solid black' w='75%' borderRadius='1rem' p='4'>
-						<HStack h='16' w='100%' justifyContent='space-between'>
-							<Image borderRadius='0.5rem' src={thumbnail} alt={title} h='100%' objectFit='cover' />
-							<Heading size='xs'>{title}</Heading>
-						</HStack>
-						<HStack w='100%' justifyContent='space-between'>
-							<Text alignSelf='flex-start' fontWeight='bold'>
-								${price}
-							</Text>
+					<HStack border='1px solid black' w='90%' borderRadius='0.5rem' py='2' px='4' justifyContent='space-between'>
+						<Box boxSize='20' borderRadius='0.25rem' overflow='hidden'>
+							<Image src={thumbnail} alt={title} h='100%' objectFit='cover' />
+						</Box>
+						<VStack h='100%' justifyContent='space-between' alignItems='flex-end'>
+							<Text>{title}</Text>
 							<HStack>
-								<Button size='xs' onClick={() => handleQtyChange(item.id, item.qty - 1)}>
-									-
-								</Button>
-								<Text alignSelf='flex-end'>{qty}</Text>
-								<Button size='xs' onClick={() => handleQtyChange(item.id, item.qty + 1)}>
-									+
-								</Button>
+								<Text fontWeight='bold' mr='1'>
+									${price}
+								</Text>
+								<HStack>
+									<Button size='sm' onClick={() => handleQtyChange(cartItem.id, cartItem.qty - 1)}>
+										-
+									</Button>
+									<Text>{qty}</Text>
+									<Button size='sm' onClick={() => handleQtyChange(cartItem.id, cartItem.qty + 1)}>
+										+
+									</Button>
+								</HStack>
 							</HStack>
-						</HStack>
-					</VStack>
+						</VStack>
+					</HStack>
 				);
 			})}
 		</VStack>
