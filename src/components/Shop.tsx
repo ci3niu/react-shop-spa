@@ -1,8 +1,8 @@
 import { Box, Grid, GridItem, Heading, Image, VStack, Text, Button } from '@chakra-ui/react';
-import { Product, ShopProps } from '../App.types';
+import { Product, ShopAndCartProps } from '../App.types';
 import { ACTIONS } from '../reducers/shopReducer';
 
-const Shop: React.FC<ShopProps> = ({ state, dispatch }) => {
+const Shop: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	const { products, cart } = state;
 
 	return (

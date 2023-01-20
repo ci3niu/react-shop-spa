@@ -1,3 +1,5 @@
+import { ReducerState } from '../App.types';
+
 export const ACTIONS = {
 	ADD_PRODUCTS: 'add-products',
 	ADD_TO_CART: 'add-to-cart',
@@ -5,7 +7,7 @@ export const ACTIONS = {
 };
 
 export const shopReducer = (
-	state: any,
+	state: ReducerState,
 	action: {
 		payload: any;
 		type: string;

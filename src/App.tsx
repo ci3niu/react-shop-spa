@@ -1,11 +1,12 @@
 import { Heading, HStack } from '@chakra-ui/react';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { ACTIONS, shopReducer } from './reducers/shopReducer';
 import Cart from './components/Cart';
 import Shop from './components/Shop';
+import { ReducerState } from './App.types';
 
 const App = () => {
-	const [state, dispatch] = useReducer(shopReducer, {
+	const [state, dispatch]: [ReducerState, React.Dispatch<{ payload: any; type: string }>] = useReducer(shopReducer, {
 		products: [],
 		cart: [],
 	});
