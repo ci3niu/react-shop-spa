@@ -1,9 +1,11 @@
-import { Heading, HStack } from '@chakra-ui/react';
 import { useEffect, useReducer } from 'react';
+
 import { ACTIONS, shopReducer } from './reducers/shopReducer';
-import Cart from './components/Cart';
-import Shop from './components/Shop';
 import { ReducerState } from './App.types';
+
+import { Heading, HStack, VStack } from '@chakra-ui/react';
+import Cart from './components/Cart/Cart';
+import Shop from './components/Shop/Shop';
 
 const App = () => {
 	const [state, dispatch]: [ReducerState, React.Dispatch<{ payload: any; type: string }>] = useReducer(shopReducer, {
@@ -25,14 +27,26 @@ const App = () => {
 		getData();
 	}, []);
 
-	if (products.length === 0) return <Heading>Loading data...</Heading>;
+	if (products.length === 0) {
+		return (
+			<VStack h='100vh' justifyContent='center'>
+				<Heading>Loading data...</Heading>;
+			</VStack>
+		);
+	}
 
 	return (
-		<HStack w='100vw' justifyContent='space-between'>
+		<HStack w='100vw'>
 			{products.length > 0 && (
 				<>
-					<Shop state={state} dispatch={dispatch} />
-					<Cart state={state} dispatch={dispatch} />
+					<VStack w='80%' p='4' h='100vh'>
+						<Heading>Shop</Heading>
+						<Shop state={state} dispatch={dispatch} />
+					</VStack>
+					<VStack w='20%' bgColor='#ddd' p='4' h='100vh'>
+						<Heading mb='8'>Cart</Heading>
+						<Cart state={state} dispatch={dispatch} />
+					</VStack>
 				</>
 			)}
 		</HStack>

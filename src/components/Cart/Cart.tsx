@@ -1,7 +1,7 @@
 import { Heading, VStack, Text, Box, Image, Button, HStack, Container } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { ShopAndCartProps } from '../App.types';
-import { ACTIONS } from '../reducers/shopReducer';
+import { ShopAndCartProps } from '../../App.types';
+import { ACTIONS } from '../../reducers/shopReducer';
 
 const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	const [total, setTotal] = useState<Number>();
@@ -22,8 +22,7 @@ const Cart: React.FC<ShopAndCartProps> = ({ state, dispatch }) => {
 	}, [cart]);
 
 	return (
-		<VStack w='20%' bgColor='#ddd' alignSelf='flex-start' p='4' h='100vh'>
-			<Heading>Cart</Heading>
+		<VStack>
 			<Heading size='sm'>{`Total: $${total}`}</Heading>
 			{cart.length > 0 ? <div></div> : <Text>Cart is empty</Text>}
 			{cart.map((item) => {
